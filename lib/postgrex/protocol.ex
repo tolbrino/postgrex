@@ -65,6 +65,9 @@ defmodule Postgrex.Protocol do
 
             :error ->
               case Keyword.fetch(opts, :hostname) do
+                {:ok, hostname} when is_tuple(hostname) ->
+                  {hostname, port}
+
                 {:ok, hostname} ->
                   {to_charlist(hostname), port}
 
